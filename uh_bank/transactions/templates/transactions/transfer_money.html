@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="w-full flex mt-5 justify-center ">
+    <div class="bg-white w-5/12 rounded-lg">  
+      <h1 class="font-bold text-3xl text-center pb-5 pt-10 px-5">Transfer Money</h1>
+      <form method="post" action="{% url 'transfer_money' %}" class="px-8 pt-6 pb-8 mb-4">
+        
+        {% csrf_token %}
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+            Amount
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="amount" id="amount" type="number" required placeholder="Amount">
+          {% if form.amount.errors %} 
+            {% for error in form.amount.errors %}
+              <p class="text-red-600 text-sm italic mt-2">{{ error }}</p>
+            {% endfor %} 
+          {% endif %}
+        </div>
+
+        <br>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="target_account_number">
+            Target Account Number
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="target_account_number" id="target_account_number" type="text" required placeholder="Target Account Number">
+          {% if form.errors.target_account_number %} 
+            {% for error in form.errors.target_account_number %}
+              <p class="text-red-600 text-sm italic mt-2">{{ error }}</p>
+            {% endfor %} 
+          {% endif %}
+        </div>
+
+        <br>
+
+        <div class="flex w-full justify-center">
+          <button class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2 rounded-lg" type="submit">
+            Transfer
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}
